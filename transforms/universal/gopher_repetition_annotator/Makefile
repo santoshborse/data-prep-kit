@@ -19,8 +19,8 @@ TRANSFORM_PYTHON_SRC="-m dpk_$(TRANSFORM_NAME).runtime"
 TRANSFORM_RAY_SRC="-m dpk_$(TRANSFORM_NAME).ray.runtime"
 
 run-python-cli-sample:
-	# make venv
+	make venv
 	source venv/bin/activate && \
 	rm -rf output && \
 	$(PYTHON) -m dpk_$(TRANSFORM_NAME).runtime \
-		--data_local_config "{ 'input_folder' : 'test-data/input', 'output_folder' : 'output/parquet'}"
+		--data_local_config "{ 'input_folder' : 'test-data/input', 'output_folder' : 'output'}"
