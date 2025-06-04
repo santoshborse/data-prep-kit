@@ -58,5 +58,5 @@ class FineWebQualityAnnotator:
 
 if __name__ == "__main__":
     launcher = PythonTransformLauncher(FineWebQualityAnnotatorPythonConfiguration())
-    logger.info("Launching FineWebQualityAnnotator Python based transform")
+    logger.info("Launching FineWebQualityAnnotator Pure Python transform")
     launcher.launch()

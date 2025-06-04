@@ -36,7 +36,7 @@ ELLIPSIS = "..."
 # configuration keys
 contents_column_name_key = "contents_column_name"
 """ Key holds the name of the column holding the document text."""
-frac_line_punct_cname_key = "clean_contents_column_name"
+frac_line_punct_cname_key = "frac_line_punct_cname"
 """ Key holds the name of the output table column storing the fraction of lines that end with punctuation."""
 dup_line_char_frac_cname_key = "dup_line_char_frac_cname"
 """ Key holds the name of the output table column storing the duplicate line character fraction"""
@@ -280,9 +280,3 @@ class FineWebQualityAnnotatorConfiguration(TransformConfiguration):
         self.params[afwq_data_access_key] = self.daf
         # Validate and populate the transform's DataAccessFactory
         return self.daf.apply_input_params(args)
-
-
-if __name__ == "__main__":
-    launcher = PythonTransformLauncher(FineWebQualityAnnotatorConfiguration())
-    logger.info("Launching FineWeb Quality Annotator transform")
-    launcher.launch()
