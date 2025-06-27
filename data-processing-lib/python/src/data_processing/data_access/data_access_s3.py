@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 # (C) Copyright IBM Corp. 2024.
 # Licensed under the Apache License, Version 2.0 (the “License”);
 # you may not use this file except in compliance with the License.
@@ -16,6 +17,8 @@ import traceback
 from typing import Any
 
 import pyarrow
+#from data_access import DataAccess
+#from arrow_s3 import ArrowS3
 from data_processing.data_access import ArrowS3, DataAccess
 from data_processing.utils import DPKConfig, TransformUtils, get_logger
 
@@ -86,11 +89,13 @@ class DataAccessS3(DataAccess):
 
     def __init__(
         self,
-        config: dict[str, str],
+        s3_credentials: dict[str, str] = None,
+        s3_config: dict[str, str] = None,
         d_sets: list[str] = None,
         checkpoint: bool = False,
         m_files: int = -1,
         n_samples: int = -1,
+        batch_size: int = -1,
         files_to_use: list[str] = [".parquet"],
         files_to_checkpoint: list[str] = [".parquet"],
     ):
@@ -105,23 +110,18 @@ class DataAccessS3(DataAccess):
         :param files_to_use: files extensions of files to include
         :param files_to_checkpoint: files extensions of files to use for checkpointing
         """
-        super().__init__(
-            d_sets=d_sets,
-            checkpoint=checkpoint,
-            m_files=m_files,
-            n_samples=n_samples,
-            files_to_use=files_to_use,
-            files_to_checkpoint=files_to_checkpoint,
-        )
-
-        if config is not None:
-            prefix = config.get("prefix", "data_")
-            access_key = config.get("access_key", DPKConfigS3(prefix).S3_KEY)
-            secret_key = config.get("secret_key", DPKConfigS3(prefix).S3_SECRET)
-            endpoint = config.get("url", DPKConfigS3(prefix).S3_ENDPOINT)
-            region = config.get("region", DPKConfigS3(prefix).S3_REGION)
-            input_folder = config.get("input_folder", None)
-            output_folder = config.get("output_folder", None)
+        super().__init__(d_sets=d_sets, checkpoint=checkpoint, m_files=m_files, n_samples=n_samples,
+                         batch_size=batch_size, files_to_use=files_to_use, files_to_checkpoint=files_to_checkpoint)
+        if (
+            s3_credentials is None
+            or s3_credentials.get("access_key", None) is None
+            or s3_credentials.get("secret_key", None) is None
+        ):
+            raise "S3 credentials is not defined"
+        self.s3_credentials = s3_credentials
+        if s3_config is None:
+            self.input_folder = None
+            self.output_folder = None
         else:
             access_key = DPKConfigS3().S3_KEY
             secret_key = DPKConfigS3().S3_SECRET

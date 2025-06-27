@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 # (C) Copyright IBM Corp. 2024.
 # Licensed under the Apache License, Version 2.0 (the “License”);
 # you may not use this file except in compliance with the License.
@@ -43,7 +44,6 @@ def compute_exec_params_func(
     data_checkpointing: bool,
     runtime_pipeline_id: str,
     runtime_job_id: str,
-    runtime_code_location: dict,
     enrichment_output_column_prefix: str,
     enrichment_content_column_name: str,
     enrichment_lang_column_name: str,
@@ -88,7 +88,6 @@ def compute_exec_params_func(
         "runtime_worker_options": str(actor_options),
         "runtime_pipeline_id": runtime_pipeline_id,
         "runtime_job_id": runtime_job_id,
-        "runtime_code_location": str(runtime_code_location),
         "enrichment_output_column_prefix": enrichment_output_column_prefix,
         "enrichment_content_column_name": enrichment_content_column_name,
         "enrichment_lang_column_name": enrichment_lang_column_name,
@@ -174,7 +173,6 @@ def enrichment(
     # orchestrator
     runtime_actor_options: dict = {"num_cpus": 0.8},
     runtime_pipeline_id: str = "pipeline_id",
-    runtime_code_location: dict = {"github": "github", "commit_hash": "12345", "path": "path"},
     # enrichment parameters
     enrichment_output_column_prefix: str = "e_",
     enrichment_content_column_name: str = "text",
@@ -244,7 +242,6 @@ def enrichment(
     :param data_num_samples - num samples to process
     :param runtime_actor_options - actor options
     :param runtime_pipeline_id - pipeline id
-    :param runtime_code_location - code location
     :param enrichment_output_column_prefix - Prefix to add to all output column names that are not explicitly defined
     :param enrichment_content_column_name - Name of the content column
     :param enrichment_lang_column_name - Name of the column with the language identifier
@@ -308,7 +305,6 @@ def enrichment(
             data_checkpointing=data_checkpointing,
             runtime_pipeline_id=runtime_pipeline_id,
             runtime_job_id=run_id,
-            runtime_code_location=runtime_code_location,
             enrichment_output_column_prefix=enrichment_output_column_prefix,
             enrichment_content_column_name=enrichment_content_column_name,
             enrichment_lang_column_name=enrichment_lang_column_name,

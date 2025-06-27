@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 # (C) Copyright IBM Corp. 2024.
 # Licensed under the Apache License, Version 2.0 (the “License”);
 # you may not use this file except in compliance with the License.
@@ -265,12 +266,14 @@ class Docling2ParquetTransform(AbstractBinaryTransform):
 
     def _detect_mime(self, file_name: str, content_bytes: bytes) -> tuple[str|None, str]:
         kind = filetype.guess(content_bytes)
-        ext = TransformUtils.get_file_extension(file_name)[1]
+        ext = TransformUtils.get_file_extension(file_name)[1].lower()
         if kind is not None:
             mime = kind.mime
             ext = kind.extension
         elif ext == ".xml":
             mime = "application/xml"
+        elif ext == ".html" or ext == ".htm":
+            mime = "text/html"
         else:
             mime = None
         

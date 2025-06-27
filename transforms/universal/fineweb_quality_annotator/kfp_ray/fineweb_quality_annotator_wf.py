@@ -30,10 +30,10 @@ EXEC_SCRIPT_NAME: str = "-m dpk_fineweb_quality_annotator.ray.runtime"
 PREFIX: str = ""
 
 
-task_image = "quay.io/dataprep1/data-prep-kit/fineweb-quality-annotator-ray:latest"
+task_image = "quay.io/dataprep1/data-prep-kit/fineweb_quality_annotator-ray:latest"
 
 # components
-base_kfp_image = "quay.io/dataprep1/data-prep-kit/kfp-data-processing_v2:latest"
+base_kfp_image = "quay.io/dataprep1/data-prep-kit/kfp-data-processing:latest"
 
 # path to kfp component specifications files
 component_spec_path = os.getenv("KFP_COMPONENT_SPEC_PATH", DEFAULT_KFP_COMPONENT_SPEC_PATH)
