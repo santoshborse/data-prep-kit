@@ -198,6 +198,7 @@ class RayRemoteJobs:
             image = worker_node.get("image", self.default_image)
             image_pull_secret = worker_node.get("image_pull_secret", None)
             image_pull_policy = head_node.get("image_pull_policy", None)
+            print(f"head_node {image_pull_policy = }")
             ray_start_params = worker_node.get("ray_start_params", DEFAULT_WORKER_START_PARAMS)
             volumes_dict = worker_node.get("volumes", None)
             service_account = worker_node.get("service_account", None)

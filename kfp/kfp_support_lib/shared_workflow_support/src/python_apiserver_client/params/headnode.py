@@ -69,7 +69,7 @@ class HeadNodeSpec:
         environment: EnvironmentVariables = None,
         annotations: dict[str, str] = None,
         labels: dict[str, str] = None,
-        image_pull_policy: str = None,
+        image_pull_policy: str = "Always",
     ):
         """
         Initialization

@@ -47,7 +47,7 @@ class ComponentUtils:
     def add_settings_to_component(
         component: dsl.ContainerOp,
         timeout: int,
-        image_pull_policy: str = "IfNotPresent",
+        image_pull_policy: str = "Always",
         cache_strategy: str = "P0D",
     ) -> None:
         """

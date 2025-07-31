@@ -43,7 +43,7 @@ class ComponentUtils:
     def add_settings_to_component(
         task: dsl.PipelineTask,
         timeout: int,
-        image_pull_policy: str = "IfNotPresent",
+        image_pull_policy: str = "Always",
         image_pull_secrets: list = [],
         cache_strategy: bool = False,
     ) -> None:
