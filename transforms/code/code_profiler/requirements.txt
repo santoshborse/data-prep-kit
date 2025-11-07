@@ -1,0 +1,14 @@
+pandas
+click
+httpx-sse
+ibm-generative-ai
+matplotlib
+matplotlib-inline
+networkx
+numpy<=1.26.4
+plotly
+pyarrow
+streamlit
+tree-sitter==0.21.3
+tree-sitter-languages==1.10.2
+sentence_transformers
